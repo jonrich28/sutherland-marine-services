@@ -43,3 +43,20 @@ next-env.d.ts
 # firebase
 firebase-debug.log
 firestore-debug.log
+# Build artifacts and temporary files
+tsconfig.tsbuildinfo
+out/
+*.tmp
+*.temp
+
+# Debug and log files
+firebase-debug.log
+npm-debug.log*
+yarn-debug.log*
+
+# Environment files with secrets
+env.txt
+.env.local.backup
+
+# Package analysis files
+package-list.json
