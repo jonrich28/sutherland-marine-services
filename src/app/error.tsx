@@ -27,7 +27,7 @@ export default function Error({
                 </CardDescription>
             </CardHeader>
             <CardContent>
-               <p className="text-sm text-muted-foreground">We've been notified of the issue and are working to resolve it.</p>
+               <p className="text-sm text-muted-foreground">We&apos;ve been notified of the issue and are working to resolve it.</p>
                {error?.message && <p className="mt-4 text-xs bg-muted p-2 rounded-md font-mono">{error.message}</p>}
             </CardContent>
             <CardFooter className="flex justify-center">

@@ -1,6 +1,9 @@
 
 'use client';
 
+import { useEffect, useState } from 'react';
+import { OfficeManagerDashboard } from '@/components/dashboard/office-manager-dashboard';
+import { ShopManagerDashboard } from '@/components/dashboard/shop-manager-dashboard';
 import Link from 'next/link';
 import {
   Card,
@@ -51,6 +54,25 @@ const statusVariantMap: { [key: string]: "default" | "secondary" | "destructive"
 export default function DashboardPage() {
   const { jobs } = useJobs();
   const { invoices } = useInvoices();
+  const [userRole, setUserRole] = useState<'owner' | 'office-manager' | 'shop-manager' | 'technician' | 'customer' | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const role = localStorage.getItem('userRole') as 'owner' | 'office-manager' | 'shop-manager' | 'technician' | 'customer' | null;
+      setUserRole(role);
+    }
+  }, []);
+
+  // Role-specific dashboard rendering
+  if (userRole === 'office-manager') {
+    return <OfficeManagerDashboard />;
+  }
+
+  if (userRole === 'shop-manager') {
+    return <ShopManagerDashboard />;
+  }
+
+  // Default dashboard for owner, technician, and customer roles
 
   // Enhanced Revenue Calculations
   const totalRevenue = invoices
@@ -78,7 +100,6 @@ export default function DashboardPage() {
   }).length;
   
   const totalCustomers = initialCustomers.length;
-  const pendingInvoices = invoices.filter(inv => inv.status === 'Pending' || inv.status === 'Overdue').length;
   const overdueInvoices = invoices.filter(inv => inv.status === 'Overdue').length;
 
   // Calculate average job value

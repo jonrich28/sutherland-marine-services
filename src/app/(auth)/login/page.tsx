@@ -3,7 +3,6 @@
 
 import { useRouter } from 'next/navigation';
 import { LoginForm } from '@/components/auth/login-form';
-import DemoWatermark from '@/components/ui/demo-watermark';
 import LegalFooter from '@/components/ui/legal-footer';
 import {
   Card,
@@ -13,7 +12,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Sailboat, KeyRound, Shield, HardHat } from 'lucide-react';
+import { Sailboat, KeyRound, Shield, HardHat, Users, Settings } from 'lucide-react';
 
 const demoAccounts = [
   {
@@ -22,6 +21,20 @@ const demoAccounts = [
     icon: Shield,
     path: '/dashboard',
     description: 'Full access to all features.',
+  },
+  {
+    role: 'Office Manager',
+    value: 'office-manager',
+    icon: Users,
+    path: '/dashboard',
+    description: 'Customer service & financial operations.',
+  },
+  {
+    role: 'Shop Manager',
+    value: 'shop-manager',
+    icon: Settings,
+    path: '/dashboard',
+    description: 'Production management & team oversight.',
   },
   {
     role: 'Technician',
@@ -110,7 +123,6 @@ export default function LoginPage() {
           By continuing, you agree to our Demo License Terms and Privacy Policy.
         </p>
       </div>
-      <DemoWatermark />
       <LegalFooter />
     </div>
   );

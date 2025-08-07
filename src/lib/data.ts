@@ -47,6 +47,30 @@ export interface Customer {
   internalNotes: string;
 }
 
+export interface Technician {
+  id: number;
+  name: string;
+  email: string;
+  specialization: string;
+  status: 'Available' | 'On Job' | 'On Leave' | 'Active';
+  avatar: string;
+  certification: string;
+  efficiency: number;
+  workload: number;
+}
+
+export interface InventoryItem {
+  id: string;
+  name: string;
+  brand: string;
+  stock: number;
+  location: string;
+  price: string;
+  quantity: number;
+  reorderPoint: number;
+  cost: number;
+}
+
 export const initialJobs = [
   { id: 'JOB-015', customer: 'Alex Thompson', boat: 'Formula 310 BR', tech: 'Mike Miller', status: 'Completed', created: '2024-06-28', description: 'Annual engine service and oil change.', photos: [] as string[], notes: [] as {text: string, timestamp: string}[] },
   { id: 'JOB-014', customer: 'Samantha Miller', boat: 'Chris-Craft Launch 27', tech: 'David Wilson', status: 'In Progress', created: '2024-06-27', description: 'Install new GPS and fishfinder unit.', photos: [], notes: [] },
@@ -198,11 +222,11 @@ export const initialCustomers = [
 ];
 
 
-export const initialTechnicians = [
-  { id: 1, name: 'Mike Miller', email: 'mike.m@sutherlandmarine.com', specialization: 'Engine Repair', status: 'Available', avatar: 'https://placehold.co/40x40.png?text=MM' },
-  { id: 2, name: 'David Wilson', email: 'dave.w@sutherlandmarine.com', specialization: 'Electronics', status: 'On Job', avatar: 'https://placehold.co/40x40.png?text=DW' },
-  { id: 3, name: 'Chris Taylor', email: 'chris.t@sutherlandmarine.com', specialization: 'Fiberglass', status: 'Available', avatar: 'https://placehold.co/40x40.png?text=CT' },
-  { id: 4, name: 'Andrew Moore', email: 'andy.m@sutherlandmarine.com', specialization: 'General Maintenance', status: 'On Leave', avatar: 'https://placehold.co/40x40.png?text=AM' },
+export const initialTechnicians: Technician[] = [
+  { id: 1, name: 'Mike Miller', email: 'mike.m@sutherlandmarine.com', specialization: 'Engine Repair', status: 'Available', avatar: 'https://placehold.co/40x40.png?text=MM', certification: 'Marine Master', efficiency: 92, workload: 6 },
+  { id: 2, name: 'David Wilson', email: 'dave.w@sutherlandmarine.com', specialization: 'Electronics', status: 'On Job', avatar: 'https://placehold.co/40x40.png?text=DW', certification: 'Electronics Specialist', efficiency: 88, workload: 8 },
+  { id: 3, name: 'Chris Taylor', email: 'chris.t@sutherlandmarine.com', specialization: 'Fiberglass', status: 'Available', avatar: 'https://placehold.co/40x40.png?text=CT', certification: 'Hull Specialist', efficiency: 95, workload: 5 },
+  { id: 4, name: 'Andrew Moore', email: 'andy.m@sutherlandmarine.com', specialization: 'General Maintenance', status: 'On Leave', avatar: 'https://placehold.co/40x40.png?text=AM', certification: 'General Tech', efficiency: 85, workload: 0 },
 ];
 
 export const initialInvoices = [
@@ -214,13 +238,13 @@ export const initialInvoices = [
 ];
 
 
-export const initialInventoryItems = [
-  { id: 'PRT-001', name: 'Spark Plug', brand: 'NGK', stock: 48, location: 'Bin A-12', price: '$4.99' },
-  { id: 'PRT-002', name: 'Oil Filter', brand: 'Yamaha', stock: 24, location: 'Bin B-03', price: '$12.50' },
-  { id: 'PRT-003', name: 'Fuel Injector', brand: 'Mercury', stock: 8, location: 'Bin C-07', price: '$89.95' },
-  { id: 'PRT-004', name: 'Impeller Kit', brand: 'Johnson', stock: 15, location: 'Bin A-02', price: '$35.00' },
-  { id: 'PRT-005', name: 'Marine Battery', brand: 'Interstate', stock: 10, location: 'Shelf D-1', price: '$175.00' },
-  { id: 'PRT-006', name: 'Anode Kit', brand: 'Volvo Penta', stock: 3, location: 'Bin E-05', price: '$45.75' },
+export const initialInventoryItems: InventoryItem[] = [
+  { id: 'PRT-001', name: 'Spark Plug', brand: 'NGK', stock: 48, location: 'Bin A-12', price: '$4.99', quantity: 48, reorderPoint: 20, cost: 3.99 },
+  { id: 'PRT-002', name: 'Oil Filter', brand: 'Yamaha', stock: 24, location: 'Bin B-03', price: '$12.50', quantity: 24, reorderPoint: 15, cost: 8.50 },
+  { id: 'PRT-003', name: 'Fuel Injector', brand: 'Mercury', stock: 8, location: 'Bin C-07', price: '$89.95', quantity: 8, reorderPoint: 10, cost: 65.00 },
+  { id: 'PRT-004', name: 'Impeller Kit', brand: 'Johnson', stock: 15, location: 'Bin A-02', price: '$35.00', quantity: 15, reorderPoint: 12, cost: 25.00 },
+  { id: 'PRT-005', name: 'Marine Battery', brand: 'Interstate', stock: 10, location: 'Shelf D-1', price: '$175.00', quantity: 10, reorderPoint: 8, cost: 120.00 },
+  { id: 'PRT-006', name: 'Anode Kit', brand: 'Volvo Penta', stock: 3, location: 'Bin E-05', price: '$45.75', quantity: 3, reorderPoint: 5, cost: 32.00 },
 ];
 
 export const initialQuotes = [

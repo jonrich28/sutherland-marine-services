@@ -18,7 +18,7 @@ import { useState, useEffect } from 'react';
 import { initialCustomers } from '@/lib/data';
 
 interface MobileHeaderProps {
-  role: 'owner' | 'technician' | 'customer';
+  role: 'owner' | 'office-manager' | 'shop-manager' | 'technician' | 'customer';
 }
 
 const userDetails = {
@@ -27,6 +27,18 @@ const userDetails = {
     email: 'john@sutherlandmarine.com',
     company: 'Sutherland Marine',
     avatarFallback: 'JS',
+  },
+  'office-manager': {
+    name: 'Sarah Wilson',
+    email: 'sarah@sutherlandmarine.com',
+    company: 'Sutherland Marine',
+    avatarFallback: 'SW',
+  },
+  'shop-manager': {
+    name: 'Michael Brown',
+    email: 'michael@sutherlandmarine.com',
+    company: 'Sutherland Marine',
+    avatarFallback: 'MB',
   },
   technician: {
     name: 'Mike Miller',

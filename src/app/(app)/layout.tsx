@@ -3,9 +3,7 @@
 
 import { MainNav } from '@/components/layout/main-nav';
 import { UserNav } from '@/components/layout/user-nav';
-import DemoWatermark from '@/components/ui/demo-watermark';
 import LegalFooter from '@/components/ui/legal-footer';
-import DemoStatusIndicator from '@/components/ui/demo-status-indicator';
 import {
   SidebarProvider,
   Sidebar,
@@ -31,12 +29,12 @@ import { MobileHeader } from '@/components/mobile/mobile-header';
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isMobile = useIsMobile();
-  const [userRole, setUserRole] = useState<'owner' | 'technician' | 'customer' | null>(null);
+  const [userRole, setUserRole] = useState<'owner' | 'office-manager' | 'shop-manager' | 'technician' | 'customer' | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const role = localStorage.getItem('userRole') as 'owner' | 'technician' | 'customer' | null;
+      const role = localStorage.getItem('userRole') as 'owner' | 'office-manager' | 'shop-manager' | 'technician' | 'customer' | null;
       setUserRole(role);
 
       const hasOnboarded = localStorage.getItem('onboarding_completed') === 'true';
@@ -108,7 +106,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 {userRole && <MainNav role={userRole} />}
               </SidebarContent>
               <SidebarFooter>
-                <DemoStatusIndicator />
                 {userRole && <UserNav role={userRole} />}
               </SidebarFooter>
             </Sidebar>
@@ -125,7 +122,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <main className="flex-1 overflow-auto p-6">{children}</main>
               <LegalFooter />
             </SidebarInset>
-            <DemoWatermark />
             {userRole && <OnboardingTour role={userRole} open={showOnboarding} onOpenChange={setShowOnboarding} onComplete={handleOnboardingComplete} />}
           </SidebarProvider>
         </QuotesProvider>

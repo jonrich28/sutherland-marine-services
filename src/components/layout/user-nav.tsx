@@ -26,6 +26,18 @@ const userDetails = {
         avatarFallback: 'OA',
         company: 'Sutherland Marine'
     },
+    'office-manager': {
+        name: 'Office Manager',
+        email: 'office@sutherlandmarine.com',
+        avatarFallback: 'OM',
+        company: 'Sutherland Marine'
+    },
+    'shop-manager': {
+        name: 'Shop Manager',
+        email: 'shop@sutherlandmarine.com',
+        avatarFallback: 'SM',
+        company: 'Sutherland Marine'
+    },
     technician: {
         name: 'Technician Account',
         email: 'tech@sutherlandmarine.com',
@@ -40,7 +52,7 @@ const userDetails = {
     }
 }
 
-export function UserNav({ role }: { role: 'owner' | 'technician' | 'customer' }) {
+export function UserNav({ role }: { role: 'owner' | 'office-manager' | 'shop-manager' | 'technician' | 'customer' }) {
   const router = useRouter();
   const details = userDetails[role] || userDetails.customer;
 

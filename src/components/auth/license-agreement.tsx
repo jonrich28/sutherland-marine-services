@@ -189,7 +189,7 @@ const LicenseAgreement: React.FC<LicenseAgreementProps> = ({ onAccept }) => {
               <Checkbox
                 id="agree-terms"
                 checked={agreedToTerms}
-                onCheckedChange={setAgreedToTerms}
+                onCheckedChange={(checked) => setAgreedToTerms(checked === true)}
                 className="mt-1"
               />
               <label htmlFor="agree-terms" className="text-sm text-gray-700 leading-relaxed">
@@ -202,7 +202,7 @@ const LicenseAgreement: React.FC<LicenseAgreementProps> = ({ onAccept }) => {
               <Checkbox
                 id="agree-privacy"
                 checked={agreedToPrivacy}
-                onCheckedChange={setAgreedToPrivacy}
+                onCheckedChange={(checked) => setAgreedToPrivacy(checked === true)}
                 className="mt-1"
               />
               <label htmlFor="agree-privacy" className="text-sm text-gray-700 leading-relaxed">

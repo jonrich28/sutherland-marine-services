@@ -91,7 +91,7 @@ export default function JobsPage() {
         const newJobData: Job = {
             id: `JOB-${(jobs.length + 10).toString().padStart(3, '0')}`,
             customer: newJob.customer,
-            boat: customerData?.boats[0] || 'N/A',
+            boat: typeof customerData?.boats[0] === 'string' ? customerData.boats[0] : customerData?.boats[0]?.name || 'N/A',
             tech: 'Unassigned',
             status: 'Awaiting Approval',
             created: new Date().toISOString().split('T')[0],
@@ -213,7 +213,7 @@ export default function JobsPage() {
                                <HelpCircle className="h-4 w-4 text-muted-foreground cursor-pointer" />
                             </TooltipTrigger>
                             <TooltipContent>
-                               <p>Enter a few words (e.g., "winterize engine") and let AI write the full description.</p>
+                               <p>Enter a few words (e.g., &quot;winterize engine&quot;) and let AI write the full description.</p>
                             </TooltipContent>
                          </Tooltip>
                        </div>

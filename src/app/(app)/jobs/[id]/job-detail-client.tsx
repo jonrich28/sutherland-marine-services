@@ -22,7 +22,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { MobileJobDetail } from '@/components/mobile/mobile-job-detail';
-import type { Job } from '@/hooks/use-jobs';
 
 type JobNote = {
   text: string;
@@ -73,11 +72,6 @@ export default function JobDetailClient() {
     }
   }, [job]);
 
-  // Show mobile version for technician and customer roles on mobile devices
-  if (mounted && isMobile && userRole && ['technician', 'customer'].includes(userRole) && job) {
-    return <MobileJobDetail job={job} role={userRole as 'technician' | 'customer'} onUpdateJob={updateJob} />;
-  }
-
   useEffect(() => {
     const getCameraPermission = async () => {
       if (!showCamera) return;
@@ -106,6 +100,11 @@ export default function JobDetailClient() {
       }
     };
   }, [showCamera, toast]);
+
+  // Show mobile version for technician and customer roles on mobile devices
+  if (mounted && isMobile && userRole && ['technician', 'customer'].includes(userRole) && job) {
+    return <MobileJobDetail job={job} role={userRole as 'technician' | 'customer'} onUpdateJob={updateJob} />;
+  }
 
   const handleCapture = () => {
     if (videoRef.current && job) {
@@ -154,7 +153,7 @@ export default function JobDetailClient() {
       <div className="container mx-auto p-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Job Not Found</h1>
-          <p className="text-gray-600 mb-4">The job you're looking for doesn't exist.</p>
+          <p className="text-gray-600 mb-4">The job you&apos;re looking for doesn&apos;t exist.</p>
           <Button onClick={() => router.push('/jobs')}>
             Back to Jobs
           </Button>

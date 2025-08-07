@@ -76,7 +76,7 @@ export default function QuotesPage() {
     const handleCustomerSelect = (customerName: string) => {
         const customer = initialCustomers.find(c => c.name === customerName);
         if (customer) {
-            setNewQuote({ ...newQuote, customer: customer.name, boat: customer.boats[0] });
+            setNewQuote({ ...newQuote, customer: customer.name, boat: typeof customer.boats[0] === 'string' ? customer.boats[0] : customer.boats[0]?.name || 'N/A' });
         }
     }
 

@@ -56,7 +56,10 @@ export default function TechniciansPage() {
         email: newTech.email,
         specialization: newTech.specialization,
         status: 'Available',
-        avatar: `https://placehold.co/40x40.png?text=${newTech.name.split(' ').map(n => n[0]).join('')}`
+        avatar: `https://placehold.co/40x40.png?text=${newTech.name.split(' ').map(n => n[0]).join('')}`,
+        certification: 'Basic Marine Technician',
+        efficiency: 85,
+        workload: 0,
       };
       setTechnicians([...technicians, newTechData]);
       toast({
@@ -160,7 +163,7 @@ export default function TechniciansPage() {
                       </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>{tech.name}'s Schedule</DialogTitle>
+                            <DialogTitle>{tech.name}&apos;s Schedule</DialogTitle>
                             <DialogDescription>
                               Current job assignments for {tech.name}.
                             </DialogDescription>

@@ -47,7 +47,7 @@ const userDetails = {
 export default function SettingsPage() {
   const { toast } = useToast();
   const [userRole, setUserRole] = useState<keyof typeof userDetails | null>(null);
-  const [customerData, setCustomerData] = useState<any>(null);
+  const [customerData, setCustomerData] = useState<typeof initialCustomers[0] | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function SettingsPage() {
       // If customer, get their comprehensive data
       if (role === 'customer') {
         const customer = initialCustomers.find(c => c.name === 'Alex Thompson');
-        setCustomerData(customer);
+        setCustomerData(customer || null);
       }
     }
   }, []);
@@ -132,7 +132,7 @@ export default function SettingsPage() {
         <CardHeader>
           <CardTitle>Shop Details</CardTitle>
           <CardDescription>
-            Update your marine shop's information.
+            Update your marine shop&apos;s information.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -194,7 +194,7 @@ export default function SettingsPage() {
                           </Avatar>
                           <div className="space-y-2">
                             <h3 className="font-semibold">{customerData.name}</h3>
-                            <p className="text-sm text-muted-foreground">Member since {new Date(customerData.memberSince).toLocaleDateString()}</p>
+                            <p className="text-sm text-muted-foreground">Member since {new Date(customerData.memberSince || '2024-01-01').toLocaleDateString()}</p>
                             <Button asChild variant="outline" size="sm" className="cursor-pointer">
                               <label>
                                 <Upload className="mr-2 h-4 w-4" />
@@ -321,48 +321,40 @@ export default function SettingsPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    {customerData.boats.map((boat: any, index: number) => {
-                      if (typeof boat === 'string') {
-                        return (
-                          <Card key={index}>
-                            <CardContent className="p-4">
-                              <h3 className="font-semibold">{boat}</h3>
-                              <p className="text-sm text-muted-foreground">Details not available (legacy format)</p>
-                            </CardContent>
-                          </Card>
-                        );
-                      }
+                    {customerData.boats.map((boat, index: number) => {
+                      // Type assertion since we know boats are always objects in our data
+                      const boatData = boat as { name: string; year: number; model: string; engineType: string; hullId: string; length: string; registration: string; };
                       return (
                         <div key={index} className="space-y-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
                               <Label htmlFor={`boat-name-${index}`}>Boat Name</Label>
-                              <Input id={`boat-name-${index}`} defaultValue={boat.name} />
+                              <Input id={`boat-name-${index}`} defaultValue={boatData.name} />
                             </div>
                             <div className="space-y-2">
                               <Label htmlFor={`boat-year-${index}`}>Year</Label>
-                              <Input id={`boat-year-${index}`} defaultValue={boat.year} />
+                              <Input id={`boat-year-${index}`} defaultValue={boatData.year.toString()} />
                             </div>
                             <div className="space-y-2">
                               <Label htmlFor={`boat-model-${index}`}>Model</Label>
-                              <Input id={`boat-model-${index}`} defaultValue={boat.model} />
+                              <Input id={`boat-model-${index}`} defaultValue={boatData.model} />
                             </div>
                             <div className="space-y-2">
                               <Label htmlFor={`boat-length-${index}`}>Length</Label>
-                              <Input id={`boat-length-${index}`} defaultValue={boat.length} />
+                              <Input id={`boat-length-${index}`} defaultValue={boatData.length} />
                             </div>
                             <div className="space-y-2">
                               <Label htmlFor={`boat-engine-${index}`}>Engine Type</Label>
-                              <Input id={`boat-engine-${index}`} defaultValue={boat.engineType} />
+                              <Input id={`boat-engine-${index}`} defaultValue={boatData.engineType} />
                             </div>
                             <div className="space-y-2">
                               <Label htmlFor={`boat-registration-${index}`}>Registration</Label>
-                              <Input id={`boat-registration-${index}`} defaultValue={boat.registration} />
+                              <Input id={`boat-registration-${index}`} defaultValue={boatData.registration} />
                             </div>
                           </div>
                           <div className="space-y-2">
                             <Label htmlFor={`boat-hull-${index}`}>Hull ID</Label>
-                            <Input id={`boat-hull-${index}`} defaultValue={boat.hullId} />
+                            <Input id={`boat-hull-${index}`} defaultValue={boatData.hullId} />
                           </div>
                           
                           {/* Boat Image Section */}

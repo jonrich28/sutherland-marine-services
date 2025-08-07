@@ -73,9 +73,7 @@ export default function MessagingPage() {
   const canSuggestReplies = selectedConversation && selectedConversation.messages.length > 0 && selectedConversation.messages[selectedConversation.messages.length - 1].from === 'customer';
 
   useEffect(() => {
-    // @ts-ignore
     if (scrollAreaRef.current?.scrollTo) {
-        // @ts-ignore
       scrollAreaRef.current.scrollTo({ top: scrollAreaRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [selectedConversation?.messages]);

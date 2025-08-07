@@ -56,8 +56,11 @@ export default function InventoryPage() {
         name: newPart.name,
         brand: newPart.brand,
         stock: parseInt(newPart.stock),
+        quantity: parseInt(newPart.stock),
         location: 'Unassigned',
         price: newPart.price,
+        reorderPoint: Math.max(5, Math.floor(parseInt(newPart.stock) * 0.2)),
+        cost: parseFloat(newPart.price.replace('$', '')) || 0,
       };
       setInventoryItems([...inventoryItems, newItem]);
       toast({

@@ -10,6 +10,9 @@ import {
   MessageSquare,
   Settings,
   BarChart3,
+  Calendar,
+  FileText,
+  CheckCircle,
 } from 'lucide-react';
 
 interface BottomNavItem {
@@ -19,7 +22,7 @@ interface BottomNavItem {
 }
 
 interface BottomNavigationProps {
-  role: 'technician' | 'customer' | 'owner';
+  role: 'technician' | 'customer' | 'owner' | 'office-manager' | 'shop-manager';
 }
 
 const technicianNavItems: BottomNavItem[] = [
@@ -43,6 +46,20 @@ const ownerMobileNavItems: BottomNavItem[] = [
   { href: '/messaging', label: 'Messages', icon: MessageSquare },
 ];
 
+const officeManagerNavItems: BottomNavItem[] = [
+  { href: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+  { href: '/customers', label: 'Customers', icon: Users },
+  { href: '/invoicing', label: 'Billing', icon: Receipt },
+  { href: '/messaging', label: 'Messages', icon: MessageSquare },
+];
+
+const shopManagerNavItems: BottomNavItem[] = [
+  { href: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+  { href: '/jobs', label: 'Production', icon: Wrench },
+  { href: '/technicians', label: 'Team', icon: Users },
+  { href: '/inventory', label: 'Inventory', icon: Boxes },
+];
+
 export function BottomNavigation({ role }: BottomNavigationProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -52,6 +69,10 @@ export function BottomNavigation({ role }: BottomNavigationProps) {
     navItems = technicianNavItems;
   } else if (role === 'customer') {
     navItems = customerNavItems;
+  } else if (role === 'office-manager') {
+    navItems = officeManagerNavItems;
+  } else if (role === 'shop-manager') {
+    navItems = shopManagerNavItems;
   }
 
   return (
